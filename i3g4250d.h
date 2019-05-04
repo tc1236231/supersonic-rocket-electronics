@@ -3,7 +3,7 @@
 #define GYRO_SCK 13
 #define GYRO_MISO 12
 #define GYRO_MOSI 11 
-#define GYRO_CS 8
+#define GYRO_CS 6
 
 class i3g4250d
 {

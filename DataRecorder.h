@@ -1,4 +1,4 @@
-#define SD_CS 10
+#define SD_CS 7
 
 class DataRecorder
 {
