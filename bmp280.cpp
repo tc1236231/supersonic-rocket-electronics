@@ -19,8 +19,8 @@
 #include <Adafruit_BMP280.h> // require installiong library Adafruit BMP280
 
 //Adafruit_BMP280 bme; // I2C
-//Adafruit_BMP280 bme(BMP_CS); // hardware SPI
-Adafruit_BMP280 bme(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
+Adafruit_BMP280 bme(BMP_CS); // hardware SPI
+//Adafruit_BMP280 bme(BMP_CS, BMP_MOSI, BMP_MISO,  BMP_SCK);
 
 BMP280::BMP280(float seaLevelhPa)
 {

@@ -52,21 +52,21 @@ char* i3g4250d::collectData() {
         angular_rate_mdps[0] = i3g4250d_from_fs245dps_to_mdps(data_raw_angular_rate.i16bit[0]);
         angular_rate_mdps[1] = i3g4250d_from_fs245dps_to_mdps(data_raw_angular_rate.i16bit[1]);
         angular_rate_mdps[2] = i3g4250d_from_fs245dps_to_mdps(data_raw_angular_rate.i16bit[2]);
-
-        Serial.print(data_raw_angular_rate.i16bit[0]);
-        Serial.print("\t");
-        Serial.print(data_raw_angular_rate.i16bit[1]);
-        Serial.print("\t");
-        Serial.println(data_raw_angular_rate.i16bit[2]);
-
-        char str_x[20];
-        char str_y[20];
-        char str_z[20];
-        dtostrf(angular_rate_mdps[0], 10, 3, str_x);
-        dtostrf(angular_rate_mdps[1], 10, 3, str_y);
-        dtostrf(angular_rate_mdps[2], 10, 3, str_z);
-        sprintf(output,"%s,%s,%s", str_x,str_y,str_z);
       }
+
+      Serial.print(data_raw_angular_rate.i16bit[0]);
+      Serial.print("\t");
+      Serial.print(data_raw_angular_rate.i16bit[1]);
+      Serial.print("\t");
+      Serial.println(data_raw_angular_rate.i16bit[2]);
+
+      char str_x[20];
+      char str_y[20];
+      char str_z[20];
+      dtostrf(data_raw_angular_rate.i16bit[0], 10, 3, str_x);
+      dtostrf(data_raw_angular_rate.i16bit[1], 10, 3, str_y);
+      dtostrf(data_raw_angular_rate.i16bit[2], 10, 3, str_z);
+      sprintf(output,"%s,%s,%s", str_x,str_y,str_z);
     }
 
     return output;
