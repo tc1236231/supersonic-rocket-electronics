@@ -27,7 +27,7 @@ void i3g4250d::init() {
     i3g4250d_data_rate_set(&dev_ctx, I3G4250D_ODR_100Hz);
 }
   
-char* i3g4250d::collectData() {
+String i3g4250d::collectData() {
     uint8_t flags;
     uint8_t num = 0;
     
@@ -37,7 +37,7 @@ char* i3g4250d::collectData() {
      * Read watermark interrupt flag
      */
     i3g4250d_fifo_wtm_flag_get(&dev_ctx, &flags);
-    char output[256];
+    String output;
     //if (flags)
     {
       /*
@@ -59,14 +59,12 @@ char* i3g4250d::collectData() {
       Serial.print(data_raw_angular_rate.i16bit[1]);
       Serial.print("\t");
       Serial.println(data_raw_angular_rate.i16bit[2]);
-
-      char str_x[20];
-      char str_y[20];
-      char str_z[20];
-      dtostrf(data_raw_angular_rate.i16bit[0], 10, 3, str_x);
-      dtostrf(data_raw_angular_rate.i16bit[1], 10, 3, str_y);
-      dtostrf(data_raw_angular_rate.i16bit[2], 10, 3, str_z);
-      sprintf(output,"%s,%s,%s", str_x,str_y,str_z);
+  
+      output = data_raw_angular_rate.i16bit[0];
+      output += ',';
+      output += data_raw_angular_rate.i16bit[1];
+      output += ',';
+      output += data_raw_angular_rate.i16bit[2];
     }
 
     return output;

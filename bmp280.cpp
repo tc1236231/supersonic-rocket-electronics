@@ -34,20 +34,18 @@ void BMP280::init() {
   }
 }
   
-char* BMP280::collectData() {
+String BMP280::collectData() {
     float temp = bme.readTemperature();
     float pressure = bme.readPressure();
     float altitude = bme.readAltitude(this->seaLevelhPa);
     
-    char output[256];
-    char str_temp[20];
-    char str_pressure[20];
-    char str_altitude[20];
-    dtostrf(temp, 8, 3, str_temp);
-    dtostrf(pressure, 10, 3, str_pressure);
-    dtostrf(altitude, 10, 3, str_altitude);
-    sprintf(output,"%s,%s,%s", str_temp,str_pressure,str_altitude);
-    
+    String output;
+    output = temp;
+    output += ',';
+    output += pressure;
+    output += ',';
+    output += altitude;
+
     Serial.print("Temperature = ");
     Serial.print(temp);
     Serial.println(" *C");

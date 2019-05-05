@@ -3,17 +3,18 @@
 #include "i3g4250d.h"
 #include "DataRecorder.h"
 
-BMP280 bmp(1013.25); //!!! Sea Level Pressure For the Day
+BMP280 bmp(1014.25); //!!! Sea Level Pressure For the Day
 LIS331 acc;
 i3g4250d gyro;
 DataRecorder recorder;
 
 void setup() {
-  Serial.begin(9600);
-  bmp.init();
-  acc.init();
+  Serial.begin(115200);
   gyro.init();
+  bmp.init();
+  //acc.init();
   recorder.init();
+
 }
 
 void loop() {
@@ -21,11 +22,18 @@ void loop() {
   if (millis() - loopTimer > 100)
   {
     loopTimer = millis();
-    char* bmp_data = bmp.collectData();
-    char* acc_data = acc.collectData();
-    char* gyro_data = gyro.collectData();
-    char totalData[512];
-    sprintf(totalData, "%ld,%s,%s,%s", loopTimer,bmp_data,acc_data,gyro_data);
-    recorder.writeData(totalData);
+    String bmp_data = bmp.collectData();
+    //char* acc_data = acc.collectData();
+    String gyro_data = gyro.collectData();
+    String total_data = (String)loopTimer;
+    total_data += ',';
+    total_data += bmp_data;
+    total_data += ',';
+    total_data += gyro_data;
+
+    //sprintf(totalData, "%ld,%s,%s", loopTimer,bmp_data,gyro_data);
+    Serial.println(total_data);
+
+    recorder.writeData(total_data);
   }
 }
