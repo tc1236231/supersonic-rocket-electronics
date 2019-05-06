@@ -2,12 +2,14 @@
 #define __sparkfun_lis331_h__
 
 #include <stdint.h>
+#include <WString.h>
 
 #define ACC_SCK 13
 #define ACC_MISO 12
 #define ACC_MOSI 11 
 #define ACC_CS 10
 
+#define WHO_AM_I 0x0F
 #define CTRL_REG1        0x20
 #define CTRL_REG2        0x21
 #define CTRL_REG3        0x22
@@ -49,8 +51,8 @@ class LIS331
   // public functions
   LIS331();   // Constructor. Defers all functionality to .begin()
   void init();
-  char* collectData();
-  void begin(comm_mode mode);
+  String collectData();
+  bool begin(comm_mode mode);
   void setI2CAddr(uint8_t address);
   void setSPICSPin(uint8_t pin);
   void axesEnable(bool enable);

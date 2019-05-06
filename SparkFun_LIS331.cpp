@@ -15,17 +15,19 @@ void LIS331::init() {
   SPI.begin();
   this->setSPICSPin(ACC_CS);     // This MUST be called BEFORE .begin() so 
                           //  .begin() can communicate with the chip
-  this->begin(LIS331::USE_SPI); // Selects the bus to be used and sets
-                          //  the power up bit on the accelerometer.
-                          //  Also zeroes out all accelerometer
-                          //  registers that are user writable.
+  while(!this->begin(LIS331::USE_SPI))
+  {
+    Serial.println("Could not find acc LIS331 sensor, check wiring!");
+    delay(1000);
+  }
+  
   this->setFullScale(LIS331::LOW_RANGE);
   this->scale = 100;
   this->enableHPF(true);
   this->setHighPassCoeff(LIS331::HPC_64);
 }
 
-char* LIS331::collectData() {
+String LIS331::collectData() {
     int16_t x, y, z;
     this->readAxes(x, y, z);  // The readAxes() function transfers the
                            //  current axis readings into the three
@@ -33,14 +35,11 @@ char* LIS331::collectData() {
     float x_g = this->convertToG(this->scale,x,'x');
     float y_g = this->convertToG(this->scale,y,'y');
     float z_g = this->convertToG(this->scale,z,'z');
-    char output[256];
-    char str_x_g[6];
-    char str_y_g[6];
-    char str_z_g[6];
-    dtostrf(x_g, 4, 2, str_x_g);
-    dtostrf(y_g, 4, 2, str_y_g);
-    dtostrf(z_g, 4, 2, str_z_g);
-    sprintf(output,"%d,%d,%d,%s,%s,%s", x,y,z,str_x_g,str_y_g,str_z_g);
+    String output = String(x_g,3);
+    output += ",";
+    output += String(y_g,3);
+    output += ",";
+    output += String(z_g,3);
     
     Serial.println(x);
     Serial.println(y);
@@ -54,7 +53,7 @@ char* LIS331::collectData() {
     return output;
 }
 
-void LIS331::begin(comm_mode mode)
+bool LIS331::begin(comm_mode mode)
 {
   this->mode = mode;
   setPowerMode(NORMAL);
@@ -62,6 +61,10 @@ void LIS331::begin(comm_mode mode)
   uint8_t data = 0;
   for (int i = 0x21; i < 0x25; i++) LIS331_write(i,&data,1);
   for (int i = 0x30; i < 0x37; i++) LIS331_write(i,&data,1);
+  if(this->readReg(WHO_AM_I) != 0x32)
+    return false;
+  else
+    return true;
 }
 
 void LIS331::setI2CAddr(uint8_t address)
