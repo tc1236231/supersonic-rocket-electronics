@@ -6,5 +6,5 @@ class DataRecorder
 {
   public:
     void init();
-    void writeData(String string);
+    void writeData(long currentTime, String string);
 };
