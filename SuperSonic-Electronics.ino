@@ -10,30 +10,32 @@ DataRecorder recorder;
 
 void setup() {
   Serial.begin(115200);
+  //Order seems to matter
   gyro.init();
   bmp.init();
-  //acc.init();
+  acc.init();
   recorder.init();
 
 }
 
 void loop() {
   static long loopTimer = 0;
-  if (millis() - loopTimer > 100)
+  if (millis() - loopTimer >= 100)
   {
     loopTimer = millis();
     String bmp_data = bmp.collectData();
-    //char* acc_data = acc.collectData();
+    String acc_data = acc.collectData();
     String gyro_data = gyro.collectData();
     String total_data = (String)loopTimer;
     total_data += ',';
     total_data += bmp_data;
     total_data += ',';
     total_data += gyro_data;
+    total_data += ',';
+    total_data += acc_data;
 
-    //sprintf(totalData, "%ld,%s,%s", loopTimer,bmp_data,gyro_data);
     Serial.println(total_data);
 
-    recorder.writeData(total_data);
+    recorder.writeData(loopTimer, total_data);
   }
 }
