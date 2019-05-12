@@ -3,7 +3,7 @@
 #include "i3g4250d.h"
 #include "DataRecorder.h"
 
-BMP280 bmp(1014.25); //!!! Sea Level Pressure For the Day
+BMP280 bmp(1013.25); //!!! Sea Level Pressure For the Day
 LIS331 acc;
 i3g4250d gyro;
 DataRecorder recorder;
