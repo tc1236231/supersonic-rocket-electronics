@@ -35,29 +35,29 @@ void BMP280::init() {
 }
   
 String BMP280::collectData() {
-    float temp = bme.readTemperature();
+//    float temp = bme.readTemperature();
     float pressure = bme.readPressure();
-    float altitude = bme.readAltitude(this->seaLevelhPa);
+//    float altitude = bme.readAltitude(this->seaLevelhPa);
     
     String output;
-    output = temp;
-    output += ',';
+//    output = temp;
+//    output += ',';
     output += pressure;
-    output += ',';
-    output += altitude;
+//    output += ',';
+//    output += altitude;
 
-    Serial.print("Temperature = ");
-    Serial.print(temp);
-    Serial.println(" *C");
+//    Serial.print("Temperature = ");
+//    Serial.print(temp);
+//    Serial.println(" *C");
     
-    Serial.print("Pressure = ");
-    Serial.print(pressure);
-    Serial.println(" Pa");
+//    Serial.print("Pressure = ");
+//    Serial.print(pressure);
+//    Serial.println(" Pa");
 
-    Serial.print("Approx altitude = ");
-    Serial.print(altitude); // this should be adjusted to your local forcase
-    Serial.println(" m");
+//    Serial.print("Approx altitude = ");
+//    Serial.print(altitude); // this should be adjusted to your local forcase
+//    Serial.println(" m");
     
-    Serial.println();
+//    Serial.println();
     return output;
 }

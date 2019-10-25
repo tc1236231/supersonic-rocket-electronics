@@ -41,14 +41,14 @@ String LIS331::collectData() {
     output += ",";
     output += String(z_g,3);
     
-    Serial.println(x);
-    Serial.println(y);
-    Serial.println(z);
+//    Serial.println(x);
+//    Serial.println(y);
+//    Serial.println(z);
     
-    Serial.println(x_g); // The convertToG() function
-    Serial.println(y_g); // accepts as parameters the
-    Serial.println(z_g); // raw value and the current
-    Serial.println(" ");                // maximum g-rating.
+//    Serial.println(x_g); // The convertToG() function
+//    Serial.println(y_g); // accepts as parameters the
+//    Serial.println(z_g); // raw value and the current
+//    Serial.println(" ");                // maximum g-rating.
     
     return output;
 }

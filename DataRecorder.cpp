@@ -17,7 +17,7 @@ void DataRecorder::init()
       delay(1000);
     }
 
-    randomSeed(42); 
+    randomSeed(analogRead(0)); 
     randomSessionNumber = random(10000);
     
     fileNumber = 0;

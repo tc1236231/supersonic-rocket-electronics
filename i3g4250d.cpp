@@ -54,11 +54,11 @@ String i3g4250d::collectData() {
         angular_rate_mdps[2] = i3g4250d_from_fs245dps_to_mdps(data_raw_angular_rate.i16bit[2]);
       }
 
-      Serial.print(data_raw_angular_rate.i16bit[0]);
-      Serial.print("\t");
-      Serial.print(data_raw_angular_rate.i16bit[1]);
-      Serial.print("\t");
-      Serial.println(data_raw_angular_rate.i16bit[2]);
+//      Serial.print(data_raw_angular_rate.i16bit[0]);
+//      Serial.print("\t");
+//      Serial.print(data_raw_angular_rate.i16bit[1]);
+//      Serial.print("\t");
+//      Serial.println(data_raw_angular_rate.i16bit[2]);
   
       output = data_raw_angular_rate.i16bit[0];
       output += ',';

@@ -34,7 +34,7 @@ void loop() {
     total_data += ',';
     total_data += acc_data;
 
-    Serial.println(total_data);
+//    Serial.println(total_data);
 
     recorder.writeData(loopTimer, total_data);
   }
